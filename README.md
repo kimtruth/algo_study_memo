@@ -62,11 +62,51 @@ for i in range(1, N):
     D[i][2] = D[i - 1][1] + A[i]
 ```
 
-[11053 - 가장 긴 증가하는 부분 수열](https://www.acmicpc.net/problem/11053) : D[N]에는 최대로 가질 수 있는 수열의 길이를 담았다. 이전의 값들과 비교하여 이어질 수 있다면 최대값과 이어지는 느낌으로 해싸.
+[11053 - 가장 긴 증가하는 부분 수열](https://www.acmicpc.net/problem/11053) : D[N]에는 최대로 가질 수 있는 수열의 길이를 담았다. 이전의 값들과 비교하여 이어질 수 있다면 최대값과 이어지는 느낌으로 했다.
 ```python
 for i in range(0, N):
     D[i] = 1
     for j in range(0, i):
         if A[j] < A[i] and D[j] + 1 > D[i]:
             D[i] = D[j] + 1
+```
+
+#### 2018.02.24
+
+[11055 - 가장 큰 증가 부분 수열](https://www.acmicpc.net/problem/11055) : D[N]에는 최대로 가질 수 있는 수열의 합을 담았다. 이전의 값들과 비교하여 이어질 수 있다면 최대값과 이어지는 느낌으로 했다.
+```python
+for i in range(0, N):
+    D[i] = i
+    for j in range(0, i):
+        if A[j] < A[i] and D[j] + A[i] > D[i]:
+            D[i] = D[j] + A[i]
+```
+
+[11722 - 가장 긴 감소하는 부분 수열](https://www.acmicpc.net/problem/11722) : 부호만 살짝 바꿔줬다..!
+```python
+for i in range(0, N):
+    D[i] = 1
+    for j in range(0, i):
+        if A[j] > A[i] and D[j] + 1 > D[i]:
+            D[i] = D[j] + 1
+```
+
+[11054 - 가장 긴 바이토닉 부분 수열](https://www.acmicpc.net/problem/11054) : 앞서 풀어봤던 문제에 이용된 것을 이용해보았다. 바이토닉 수열은 증가했다가 계속 감소하므로, 가장 긴 증가 수열과 N번째 부터 거꾸로 진행되는 가장 긴 증가 수열을 두 개 이어서 가장 긴 값을 찾았다. 즉, `D[i] + D2[i] - 1`의 최대값을 찾았다.
+
+```python
+for i in range(0, N):
+  D[i] = 1
+  for j in range(0, i):
+      if A[j] < A[i] and D[j] + 1 > D[i]:
+          D[i] = D[j] + 1
+
+for i in range(N - 1, -1, -1):
+  D2[i] = 1
+  for j in range(N - 1, i, -1):
+    if A[j] < A[i] and D2[j] + 1 > D2[i]:
+      D2[i] = D2[j] + 1
+      
+for i in range(0, N):
+    if max_val < D[i] + D2[i] - 1:
+        max_val = D[i] + D2[i] - 1
 ```
