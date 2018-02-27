@@ -124,3 +124,16 @@ D[i] = max(D[i - 1] + A[i], A[i])
 D[i][0] = D[i - 1][1]
 D[i][1] = max(D[i - 1][0], D[i - 2][0] + A[i - 1]) + A[i]
 ```
+
+#### 2018.02.27
+
+[1699 - 제곱수의 합](https://www.acmicpc.net/problem/1699) : D[N]을 제곱수의 합으로 나타낼 때에 그 제곱수 항의 최소 개수라 할 때, D[N - i*i] + 1 중 최대 값을 D[N]에 넣는다.
+```python
+D = range(0, N + 1)
+for i in range(1, N + 1):
+  j = 0
+  while j*j <= N:
+    if D[i] > D[i - j*j] + 1:
+      D[i] = D[i - j*j] + 1
+    j+= 1
+```
