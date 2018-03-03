@@ -148,3 +148,12 @@ for i in range(2, N + 1, 2):
     for j in range(0, i - 4 + 1, 2):
         D[i] += 2 * D[j]
 ```
+
+#### 2018.03.03
+
+[9461 - 파도반 수열](https://www.acmicpc.net/problem/9461) : 그림을 잘 보면 D[N] = D[N - 1] + D[N - 5]가 성립함을 알 수 있었다. 앞의 항은 문제에서 준 항으로 채웠다.
+```python
+D = [1, 1, 1, 2, 2, 3, 4, 5, 7, 9]
+for i in range(10, N):
+    D.append(D[i - 1] + D[i - 5])
+```
