@@ -157,3 +157,14 @@ D = [1, 1, 1, 2, 2, 3, 4, 5, 7, 9]
 for i in range(10, N):
     D.append(D[i - 1] + D[i - 5])
 ```
+
+#### 2018.03.04
+
+[2225 - 합분해](https://www.acmicpc.net/problem/2225) : D[N][K] = D[N - L][K - 1] (0 <= L <= N) 이라는 점을 이용했다.
+```python
+D[0][0] = 1
+for n in range(0, N + 1):
+    for k in range(1, K + 1):
+        for l in range(0, n + 1):
+            D[n][k] += D[n - l][k - 1]
+```
